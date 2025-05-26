@@ -47,6 +47,24 @@
   #define M4_C 13
 #endif
 
+// Arduino Mega:
+#ifdef ESP32
+  #define M1_A 25
+  #define M1_B 33
+  #define M1_C 32
+
+  #define M2_A 14
+  #define M2_B 27
+  #define M2_C 26
+
+  // #define M3_A 8
+  // #define M3_B 9
+  // #define M3_C 10
+
+  // #define M4_A 11
+  // #define M4_B 12
+  // #define M4_C 13
+#endif
 
 BLDCMotor motor1 = BLDCMotor(7);
 BLDCDriver3PWM driver1  = BLDCDriver3PWM(M1_A, M1_B, M1_C);
@@ -55,11 +73,11 @@ BLDCDriver3PWM driver1  = BLDCDriver3PWM(M1_A, M1_B, M1_C);
 BLDCMotor motor2 = BLDCMotor(7);
 BLDCDriver3PWM driver2  = BLDCDriver3PWM(M2_A, M2_B, M2_C);
 
-BLDCMotor motor3 = BLDCMotor(7);
-BLDCDriver3PWM driver3  = BLDCDriver3PWM(M3_A, M3_B, M3_C);
+// BLDCMotor motor3 = BLDCMotor(7);
+// BLDCDriver3PWM driver3  = BLDCDriver3PWM(M3_A, M3_B, M3_C);
 
-BLDCMotor motor4 = BLDCMotor(7);
-BLDCDriver3PWM driver4  = BLDCDriver3PWM(M4_A, M4_B, M4_C);
+// BLDCMotor motor4 = BLDCMotor(7);
+// BLDCDriver3PWM driver4  = BLDCDriver3PWM(M4_A, M4_B, M4_C);
 
 //Target variable
 float target_velocity = 5;
@@ -84,30 +102,30 @@ void setup() {
   motor2.voltage_limit = 3;   // [V]
   motor2.velocity_limit = 40; // [rad/s]
   
-  driver3.voltage_power_supply = 12;
-  driver3.init();
-  motor3.linkDriver(&driver3);
-  motor3.voltage_limit = 3;   // [V]
-  motor3.velocity_limit = 40; // [rad/s]
+  // driver3.voltage_power_supply = 12;
+  // driver3.init();
+  // motor3.linkDriver(&driver3);
+  // motor3.voltage_limit = 3;   // [V]
+  // motor3.velocity_limit = 40; // [rad/s]
   
-  driver4.voltage_power_supply = 12;
-  driver4.init();
-  motor4.linkDriver(&driver4);
-  motor4.voltage_limit = 3;   // [V]
-  motor4.velocity_limit = 40; // [rad/s]
+  // driver4.voltage_power_supply = 12;
+  // driver4.init();
+  // motor4.linkDriver(&driver4);
+  // motor4.voltage_limit = 3;   // [V]
+  // motor4.velocity_limit = 40; // [rad/s]
 
 
   //Open loop control mode setting
   motor1.controller = MotionControlType::velocity_openloop;
   motor2.controller = MotionControlType::velocity_openloop;
-  motor3.controller = MotionControlType::velocity_openloop;
-  motor4.controller = MotionControlType::velocity_openloop;
+  // motor3.controller = MotionControlType::velocity_openloop;
+  // motor4.controller = MotionControlType::velocity_openloop;
 
   //Initialize the hardware
   motor1.init();
   motor2.init();
-  motor3.init();
-  motor4.init();
+  // motor3.init();
+  // motor4.init();
 
 
   //Add T command
@@ -120,12 +138,12 @@ void setup() {
 }
 
 void loop() {
-  float vel = 30.0;
+  float vel = 35.0;
 
   motor1.move(vel);
   motor2.move(vel);
-  motor3.move(vel);
-  motor4.move(vel);
+  // motor3.move(vel);
+  // motor4.move(vel);
 
   //User newsletter
   command.run();
